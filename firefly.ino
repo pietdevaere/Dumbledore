@@ -37,19 +37,32 @@ int read_light(int lightNr){
     }
     return NONE;                     // don't return any activity
   }
-  else if (inState[lightNr] == 1){   // if the last read was high
-    if (newVal == 0){                // if we have a faling edge
-      long timeDelta;
-
-      inState[lightNr] = 0;          // set the last state to low
-      timeDelta = millis() - inMillis[lightNr];              //calculate the time the pin was high
-      
-      if (timeDelta > allThreshold) return ALL;              // if it was more than the all of timer
-      else if (timeDelta > zoneThreshold) return ZONE;       // if it was more than the zone timer
-      else if (timeDelta > debounceTime) return TOGGLE;   // if it was more than the debounce timer
-    }
-    return NONE;  // otherwise dont't return anny acitivtiy
- }
+  /* Triger an all or zone off whenever the timer has elapsed
+     but only trigger the toggle on a faling edge */
+  else{
+    long timeDelta;
+    if (newVal == 0) inState[lightNr] = 0;     // set the last known state to off
+    timeDelta = millis() - inMillis[lightNr];  // calculate the time the pin was high upto now
+    if (timeDelta > allThreshold) return ALL;  // if it was more than the all of timer
+    else if (timeDelta > zoneThreshold) return ZONE;  // if it was more than the zone timer
+    else if (newVal == 0 && timeDelta > debounceTime) return TOGGLE; // faling edge and valid pulse
+  }
+  
+  
+  
+//  else if (inState[lightNr] == 1){   // if the last read was high
+//    if (newVal == 0){                // if we have a faling edge
+//      long timeDelta;
+//
+//      inState[lightNr] = 0;          // set the last state to low
+//      timeDelta = millis() - inMillis[lightNr];              //calculate the time the pin was high
+//      
+//      if (timeDelta > allThreshold) return ALL;              // if it was more than the all of timer
+//      else if (timeDelta > zoneThreshold) return ZONE;       // if it was more than the zone timer
+//      else if (timeDelta > debounceTime) return TOGGLE;   // if it was more than the debounce timer
+//    }
+//    return NONE;  // otherwise dont't return anny acitivtiy
+// }
 }
 
 int set_all_zero(){
@@ -73,7 +86,7 @@ int read_all_off(){
   }
 
   if (allInState = 1){ // if the last know value was one
-    Serial.println("We know the pin is high");
+    Serial.println("We know all the pin is high");
     if (newVal == 0){ // and we have a faling edge
       long timeDelta;
 
@@ -96,6 +109,7 @@ int do_all_off(int localTrigger){
 
  
  if (remoteTrigger){
+   Serial.println("All trigered externaly");
    set_all_zero();
    return 1;
  }
@@ -132,7 +146,7 @@ int read_zone_off(){
   }
 
   if (zoneInState = 1){ // if the last know value was one
-    Serial.println("We know the pin is high");
+    Serial.println("We know the zone pin is high");
     if (newVal == 0){ // and we have a faling edge
       long timeDelta;
 
@@ -147,7 +161,7 @@ int read_zone_off(){
 }
 
 int do_zone_off(int localTrigger){
- if(localTrigger) Serial.println("All trigered localy");
+ if(localTrigger) Serial.println("Zone trigered localy");
  int remoteTrigger;
  
 // remoteTrigger = digitalRead(allPin); // replace this with a proper debouncing function
@@ -155,6 +169,7 @@ int do_zone_off(int localTrigger){
 
  
  if (remoteTrigger){
+   Serial.println("Zone trigered externaly");
    set_all_zero();
    return 1;
  }
