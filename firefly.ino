@@ -63,8 +63,6 @@ int read_all_off(){
   int newVal;
 
   newVal = digitalRead(allPin);
-  Serial.println(newVal);
-  Serial.println(allState);
   
   if (allInState == 0){  // If the last know state was low
     if (newVal == 1){  // and we detect a rising edge
@@ -119,6 +117,65 @@ int do_all_off(int localTrigger){
  return 0;
 }
 
+int read_zone_off(){
+  int newVal;
+
+  newVal = digitalRead(zonePin);
+  
+  
+  if (zoneInState == 0){  // If the last know state was low
+    if (newVal == 1){  // and we detect a rising edge
+      zoneDebounce = millis(); // start the timer
+      zoneInState = 1; // last know value is now high
+    }
+    return 0; // we haven't read a valid pulse
+  }
+
+  if (zoneInState = 1){ // if the last know value was one
+    Serial.println("We know the pin is high");
+    if (newVal == 0){ // and we have a faling edge
+      long timeDelta;
+
+      zoneInState = 0; // last known value is now low
+      timeDelta = millis()-zoneDebounce;
+      if (timeDelta > minPulseWidth) return 1; // valid pulse detected
+      }
+  }
+
+  return 0; // no valid pulse detected
+
+}
+
+int do_zone_off(int localTrigger){
+ if(localTrigger) Serial.println("All trigered localy");
+ int remoteTrigger;
+ 
+// remoteTrigger = digitalRead(allPin); // replace this with a proper debouncing function
+ remoteTrigger = read_zone_off();
+
+ 
+ if (remoteTrigger){
+   set_all_zero();
+   return 1;
+ }
+ 
+ if (localTrigger){
+   set_all_zero();
+   zoneState = 1;
+   zonePulse = millis();
+   digitalWrite(zonePin, HIGH);
+   pinMode(zonePin, OUTPUT);
+   return 1;
+ }
+ 
+ if (zoneState = 1 && millis() - zonePulse >= signalPulse){
+   zoneState = 0;
+   pinMode(zonePin, INPUT);
+ }
+ 
+ return 0;
+}
+
 int write_states(){
   int i;
   for (i = 0; i < numOfLights; i++){
@@ -166,7 +223,7 @@ void loop() {
     } 
   }
   if(!do_all_off(allOff)) // if we did not just do an all of
-  // do_zone_off(zoneOff); // stile have to make this functio
+  do_zone_off(zoneOff); // stile have to make this functio
   write_states();
  
      
