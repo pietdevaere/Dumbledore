@@ -87,13 +87,13 @@ int read_all_off(){
 
   if (allInState = 1){ // if the last know value was one
     Serial.println("We know all the pin is high");
-    if (newVal == 0){ // and we have a faling edge
+ //   if (newVal == 0){ // and we have a faling edge
       long timeDelta;
 
-      allInState = 0; // last known value is now low
+      if (newVal == 0) allInState = 0; // last known value is now low
       timeDelta = millis()-allDebounce;
       if (timeDelta > minPulseWidth) return 1; // valid pulse detected
-      }
+ //     }
   }
 
   return 0; // no valid pulse detected
@@ -147,13 +147,13 @@ int read_zone_off(){
 
   if (zoneInState = 1){ // if the last know value was one
     Serial.println("We know the zone pin is high");
-    if (newVal == 0){ // and we have a faling edge
+ //   if (newVal == 0){ // and we have a faling edge
       long timeDelta;
 
-      zoneInState = 0; // last known value is now low
+      if (newVal == 0) zoneInState = 0; // last known value is now low
       timeDelta = millis()-zoneDebounce;
       if (timeDelta > minPulseWidth) return 1; // valid pulse detected
-      }
+//      }
   }
 
   return 0; // no valid pulse detected
