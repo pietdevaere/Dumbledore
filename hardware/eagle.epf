@@ -18,6 +18,7 @@ UsedLibrary="/home/piet/eagle-5.11.0/lbr/74xx-little-de.lbr"
 UsedLibrary="/home/piet/eagle-5.11.0/lbr/74xx-little-us.lbr"
 UsedLibrary="/home/piet/eagle-5.11.0/lbr/74xx-us.lbr"
 UsedLibrary="/home/piet/eagle-5.11.0/lbr/751xx.lbr"
+UsedLibrary="/home/piet/eagle-5.11.0/lbr/NBitWonder.lbr"
 UsedLibrary="/home/piet/eagle-5.11.0/lbr/advanced-test-technologies.lbr"
 UsedLibrary="/home/piet/eagle-5.11.0/lbr/agilent-technologies.lbr"
 UsedLibrary="/home/piet/eagle-5.11.0/lbr/allegro.lbr"
@@ -232,6 +233,7 @@ UsedLibrary="/home/piet/eagle-5.11.0/lbr/nec.lbr"
 UsedLibrary="/home/piet/eagle-5.11.0/lbr/nrj-semiconductor.lbr"
 UsedLibrary="/home/piet/eagle-5.11.0/lbr/omnivision.lbr"
 UsedLibrary="/home/piet/eagle-5.11.0/lbr/on-semiconductor.lbr"
+UsedLibrary="/home/piet/eagle-5.11.0/lbr/openhardwarelogo.lbr"
 UsedLibrary="/home/piet/eagle-5.11.0/lbr/opto-honeywell-3000.lbr"
 UsedLibrary="/home/piet/eagle-5.11.0/lbr/opto-honeywell-4000.lbr"
 UsedLibrary="/home/piet/eagle-5.11.0/lbr/opto-honeywell.lbr"
@@ -336,11 +338,11 @@ UsedLibrary="/home/piet/eagle-5.11.0/lbr/zilog.lbr"
 
 [Win_1]
 Type="Schematic Editor"
-Loc="0 0 1615 1007"
+Loc="0 0 599 399"
 State=0
 Number=2
-File="/home/piet/git/firefly/hardware/mainboard.sch"
-View="-87727 -622673 1534653 468899"
+File="/home/piet/git/dimascus/lichten bus/mainboard.sch"
+View="-6671 -599951 2709775 1271183"
 WireWidths=" 0 3048 6096 8128 10160 12700 14224 16764 17780 19304 21844 25400 38100 64516 4064 1524"
 PadDiameters=" 2540 3048 4064 6096 8128 10160 12700 14224 16764 17780 19304 21844 25400 38100 64516 0"
 PadDrills=" 5000 6000 7000 9000 10000 11000 12000 13000 14000 15000 16000 20000 22000 28000 32000 8000"
@@ -372,16 +374,15 @@ ArcDirection=0
 AddLevel=2
 PadsSameType=0
 Layer=91
-Views=" 1: -508645 -480679 2742895 1783029 2: -87408 -442975 2716252 1443453 3: -87727 -622673 1534653 468899"
-Sheet=3
+Sheet=1
 
 [Win_2]
 Type="Board Editor"
-Loc="0 0 599 399"
-State=0
+Loc="818 245 1417 644"
+State=1
 Number=1
-File="/home/piet/git/firefly/hardware/mainboard.brd"
-View="-19809 -74685 1010273 1239741"
+File="/home/piet/git/dimascus/lichten bus/mainboard.brd"
+View="-19449 -31479 1332783 977569"
 WireWidths=" 0 2540 3048 6096 8128 10160 12700 14224 16764 17780 19304 21844 25400 38100 64516 4064"
 PadDiameters=" 2540 3048 4064 6096 8128 10160 12700 14224 16764 17780 19304 21844 25400 38100 64516 0"
 PadDrills=" 5000 6000 7000 9000 10000 11000 12000 13000 14000 15000 16000 20000 22000 28000 32000 8000"
@@ -416,7 +417,7 @@ Layer=16
 
 [Win_3]
 Type="Control Panel"
-Loc="173 71 1220 872"
+Loc="351 179 1398 980"
 State=2
 Number=0
 
