@@ -1,0 +1,26 @@
+Partlist exported from /home/piet/git/dumbledore/hardware/mainboard.sch at 26/08/2014 10:58
+
+Qty Value    Device        Parts                                         
+8            2N7000_TO92   Q1, Q2, Q3, Q4, Q5, Q6, Q7, Q8                
+1            10-XX         S1                                            
+1            CRYSTALHC49S  Q9                                            
+3            DIODESMA      D108, D109, D110                              
+1            FTDIUSBCABLE  CN1                                           
+2            JP1E          JP1, JP2                                      
+2            JP1Q          JP4, JP6                                      
+1            JP2E          JP5                                           
+1            JP2Q          JP3                                           
+4            MSTBA4        X3, X4, X5, X6                                
+4            MSTBA8        X1, X2, X7, X8                                
+3            PTCFUSE-1206  F100, F103, F104                              
+3            PTCFUSE-1812  F101, F102, F105                              
+5            R-EU_R0805    R100, R101, R102, R103, R104                  
+8   1N4004   DIODESMA      D100, D101, D102, D103, D104, D105, D106, D107
+8   1k       R-EU_R0805    R105, R106, R107, R108, R109, R110, R111, R112
+8   1k2      R-EU_R1206    R113, R114, R115, R116, R117, R118, R119, R120
+2   22p      C-EUC0805     C100, C101                                    
+3   100n     C-EUC0805     C102, C103, C104                              
+1   100u     CPOL-EUE5-8.5 C1                                            
+1   AVRISP-6 AVRISP-6      ISP1                                          
+1   MEGA8-P  MEGA8-P       IC1                                           
+2   PC847    PC847         OK1, OK2                                      

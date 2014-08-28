@@ -1,0 +1,76 @@
+Partlist exported from /home/piet/git/dumbledore/hardware/mainboard.sch at 28/08/2014 11:49
+
+Part Value    Device        Package    Description                         
+C1   100u     CPOL-EUE5-8.5 E5-8,5     POLARIZED CAPACITOR, European symbol
+C100 22p      C-EUC0805     C0805      CAPACITOR, European symbol          
+C101 22p      C-EUC0805     C0805      CAPACITOR, European symbol          
+C102 100n     C-EUC0805     C0805      CAPACITOR, European symbol          
+C103 100n     C-EUC0805     C0805      CAPACITOR, European symbol          
+C104 100n     C-EUC0805     C0805      CAPACITOR, European symbol          
+CN1           FTDIUSBCABLE  1X06_ROUND FTDI TTL-232R USB Cable             
+D100 1N4004   DIODESMA      SMADIODE   Diode                               
+D101 1N4004   DIODESMA      SMADIODE   Diode                               
+D102 1N4004   DIODESMA      SMADIODE   Diode                               
+D103 1N4004   DIODESMA      SMADIODE   Diode                               
+D104 1N4004   DIODESMA      SMADIODE   Diode                               
+D105 1N4004   DIODESMA      SMADIODE   Diode                               
+D106 1N4004   DIODESMA      SMADIODE   Diode                               
+D107 1N4004   DIODESMA      SMADIODE   Diode                               
+D108          DIODESMA      SMADIODE   Diode                               
+D109          DIODESMA      SMADIODE   Diode                               
+D110          DIODESMA      SMADIODE   Diode                               
+F100          PTCFUSE-1206  R1206      PTC fuses, resettable thermistors   
+F101          PTCFUSE-1812  1812       PTC fuses, resettable thermistors   
+F102          PTCFUSE-1812  1812       PTC fuses, resettable thermistors   
+F103          PTCFUSE-1206  R1206      PTC fuses, resettable thermistors   
+F104          PTCFUSE-1206  R1206      PTC fuses, resettable thermistors   
+F105          PTCFUSE-1812  1812       PTC fuses, resettable thermistors   
+IC1  MEGA8-P  MEGA8-P       DIL28-3    MICROCONTROLLER                     
+ISP1 AVRISP-6 AVRISP-6      AVRISP     AVR ISP HEADER                      
+JP1           JP1E          JP1        JUMPER                              
+JP2           JP1E          JP1        JUMPER                              
+JP3           JP2Q          JP2Q       JUMPER                              
+JP4           JP1Q          JP1        JUMPER                              
+JP5           JP2E          JP2        JUMPER                              
+JP6           JP1Q          JP1        JUMPER                              
+OK1  PC847    PC847         DIL16      SHARP OPTO COUPLER                  
+OK2  PC847    PC847         DIL16      SHARP OPTO COUPLER                  
+Q1            2N7000_TO92   TO-92      2N7000, 2N7002, NDS7002A            
+Q2            2N7000_TO92   TO-92      2N7000, 2N7002, NDS7002A            
+Q3            2N7000_TO92   TO-92      2N7000, 2N7002, NDS7002A            
+Q4            2N7000_TO92   TO-92      2N7000, 2N7002, NDS7002A            
+Q5            2N7000_TO92   TO-92      2N7000, 2N7002, NDS7002A            
+Q6            2N7000_TO92   TO-92      2N7000, 2N7002, NDS7002A            
+Q7            2N7000_TO92   TO-92      2N7000, 2N7002, NDS7002A            
+Q8            2N7000_TO92   TO-92      2N7000, 2N7002, NDS7002A            
+Q9            CRYSTALHC49S  HC49/S     CRYSTAL                             
+R100 10K      R-EU_R0805    R0805      RESISTOR, European symbol           
+R101 10K      R-EU_R0805    R0805      RESISTOR, European symbol           
+R102          R-EU_R0805    R0805      RESISTOR, European symbol           
+R103 220R     R-EU_R0805    R0805      RESISTOR, European symbol           
+R104 220R     R-EU_R0805    R0805      RESISTOR, European symbol           
+R105 1k       R-EU_R0805    R0805      RESISTOR, European symbol           
+R106 1k       R-EU_R0805    R0805      RESISTOR, European symbol           
+R107 1k       R-EU_R0805    R0805      RESISTOR, European symbol           
+R108 1k       R-EU_R0805    R0805      RESISTOR, European symbol           
+R109 1k       R-EU_R0805    R0805      RESISTOR, European symbol           
+R110 1k       R-EU_R0805    R0805      RESISTOR, European symbol           
+R111 1k       R-EU_R0805    R0805      RESISTOR, European symbol           
+R112 1k       R-EU_R0805    R0805      RESISTOR, European symbol           
+R113 1k2      R-EU_R1206    R1206      RESISTOR, European symbol           
+R114 1k2      R-EU_R1206    R1206      RESISTOR, European symbol           
+R115 1k2      R-EU_R1206    R1206      RESISTOR, European symbol           
+R116 1k2      R-EU_R1206    R1206      RESISTOR, European symbol           
+R117 1k2      R-EU_R1206    R1206      RESISTOR, European symbol           
+R118 1k2      R-EU_R1206    R1206      RESISTOR, European symbol           
+R119 1k2      R-EU_R1206    R1206      RESISTOR, European symbol           
+R120 1k2      R-EU_R1206    R1206      RESISTOR, European symbol           
+S1            10-XX         B3F-10XX   OMRON SWITCH                        
+X1            MSTBA8        MSTBA8     PHOENIX                             
+X2            MSTBA8        MSTBA8     PHOENIX                             
+X3            MSTBA4        MSTBA4     PHOENIX                             
+X4            MSTBA4        MSTBA4     PHOENIX                             
+X5            MSTBA4        MSTBA4     PHOENIX                             
+X6            MSTBA4        MSTBA4     PHOENIX                             
+X7            MSTBA8        MSTBA8     PHOENIX                             
+X8            MSTBA8        MSTBA8     PHOENIX                             
