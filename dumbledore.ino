@@ -5,22 +5,22 @@
 
 const int minPulseWidth = 10;                        // minimum duration for valid inter board signal (in ms)
 const int signalPulse = 20;                          // duration of a signal between different boards (in ms)
-const int zonePin = 2;                              // the zone off pin
+const int zonePin = 12;                              // the zone off pin
 long zoneDebounce;                                   // debounce timer for reading zoneoff
 int zoneInState = 0;                                 // state variable for reading
 long zonePulse;                                      // timer for pulse generation
 int zoneState = 0;                                   // state variable for pulse generation
-const int allPin = 3;                               // the all off pin
+const int allPin = 13;                               // the all off pin
 long allDebounce;                                    // debounce timer for reading alloff
 int allInState = 0;                                  // state variable for reading
 long allPulse;                                       // timer for pulse generation
 int allState = 0;                                    // state variable for pulse generation
-const int numOfLights = 3;                           // the number of lights
-const int lightsIn[numOfLights] = {8, 10, 12};   //The input pins of the lights
-const int lightsOut[numOfLights] = {9, 11, 13}; //The output pins of the lights
-int outState[numOfLights] = {0, 0, 0};         //The current state of the lights
-int inState[numOfLights] = {0, 0, 0};          //The current state of the inputs
-long inMillis[numOfLights] = {0, 0, 0};        //Used to debounce and time the inputs
+const int numOfLights = 7;                           // the number of lights
+const int lightsIn[numOfLights] = {10, 14, 15, 16, 17, 18, 19};   //The input pins of the lights
+const int lightsOut[numOfLights] = {9, 8, 7, 6, 5, 4, 3}; //The output pins of the lights
+int outState[numOfLights] = {0, 0, 0, 0, 0, 0, 0};         //The current state of the lights
+int inState[numOfLights] = {0, 0, 0, 0, 0, 0, 0};          //The current state of the inputs
+long inMillis[numOfLights] = {0, 0, 0, 0, 0, 0, 0};        //Used to debounce and time the inputs
 int debounceTime = 20;                               //Threshold for a valid input signal (in ms)
 int zoneThreshold = 1000;                            //Threshold to swich over to a zone signal (in ms)
 int allThreshold = 3000;                             //Threshold to switch over to an all signal (in ms)
@@ -28,7 +28,7 @@ int allThreshold = 3000;                             //Threshold to switch over 
 int read_light(int lightNr){
   int newVal;       //Stores data read from the pin
   
-  newVal = digitalRead(lightsIn[lightNr]); // read the data from the pin
+  newVal = !digitalRead(lightsIn[lightNr]); // read the data from the pin
   
   if (inState[lightNr] == 0){        // if the last read was low
     if (newVal == 1){                // if we have a rising edge
@@ -126,6 +126,7 @@ int do_all_off(int localTrigger){
  if (allState = 1 && millis() - allPulse >= signalPulse){
    allState = 0;
    pinMode(allPin, INPUT);
+   digitalWrite(allPin, LOW);
  }
  
  return 0;
@@ -186,6 +187,8 @@ int do_zone_off(int localTrigger){
  if (zoneState = 1 && millis() - zonePulse >= signalPulse){
    zoneState = 0;
    pinMode(zonePin, INPUT);
+   digitalWrite(zonePin, LOW);
+
  }
  
  return 0;
@@ -202,13 +205,14 @@ void setup() {
   int i;
   
   for (i = 0; i < numOfLights; i++){
-    pinMode(lightsIn[i], INPUT);
+    pinMode(lightsIn[i], INPUT_PULLUP);
     pinMode(lightsOut[i], OUTPUT);
   }
   
   pinMode(zonePin, INPUT);
   pinMode(allPin, INPUT);
   Serial.begin(115200);
+  Serial.println("READY");
 }
 
 void loop() {
@@ -222,17 +226,20 @@ void loop() {
         break;
       
       case TOGGLE:
-        Serial.println("TOGGLE");
+        Serial.print(i);
+        Serial.println("\t TOGGLE");
         outState[i] = !outState[i]; // toggle a light
         break;
        
       case ZONE:
-        Serial.println("ZONE");
+        Serial.print(i);
+        Serial.println("\t ZONE");
         zoneOff = 1; // trigger a zone off
         break;
       
       case ALL:
-        Serial.println("ALL");
+        Serial.print(i);
+        Serial.println("\t ALL");
         allOff = 1; // trgier an all off
         break;
     } 
