@@ -85,7 +85,7 @@ int read_all_off(){
     return 0; // we haven't read a valid pulse
   }
 
-  if (allInState = 1){ // if the last know value was one
+  if (allInState == 1){ // if the last know value was one
     Serial.println("We know all the pin is high");
  //   if (newVal == 0){ // and we have a faling edge
       long timeDelta;
@@ -111,7 +111,6 @@ int do_all_off(int localTrigger){
  if (remoteTrigger){
    Serial.println("All trigered externaly");
    set_all_zero();
-   return 1;
  }
  
  if (localTrigger){
@@ -120,16 +119,15 @@ int do_all_off(int localTrigger){
    allPulse = millis();
    digitalWrite(allPin, HIGH);
    pinMode(allPin, OUTPUT);
-   return 1;
  }
  
- if (allState = 1 && millis() - allPulse >= signalPulse){
+ if (allState == 1 && millis() - allPulse >= signalPulse){
    allState = 0;
    pinMode(allPin, INPUT);
    digitalWrite(allPin, LOW);
  }
  
- return 0;
+ return localTrigger || remoteTrigger;
 }
 
 int read_zone_off(){
@@ -146,7 +144,7 @@ int read_zone_off(){
     return 0; // we haven't read a valid pulse
   }
 
-  if (zoneInState = 1){ // if the last know value was one
+  if (zoneInState == 1){ // if the last know value was one
     Serial.println("We know the zone pin is high");
  //   if (newVal == 0){ // and we have a faling edge
       long timeDelta;
@@ -162,7 +160,7 @@ int read_zone_off(){
 }
 
 int do_zone_off(int localTrigger){
- if(localTrigger) Serial.println("Zone trigered localy");
+// if(localTrigger) Serial.println("Zone trigered localy");
  int remoteTrigger;
  
 // remoteTrigger = digitalRead(allPin); // replace this with a proper debouncing function
@@ -172,26 +170,27 @@ int do_zone_off(int localTrigger){
  if (remoteTrigger){
    Serial.println("Zone trigered externaly");
    set_all_zero();
-   return 1;
+   //return 1;
  }
  
  if (localTrigger){
+   Serial.println("Zone trigered localy");
    set_all_zero();
    zoneState = 1;
    zonePulse = millis();
    digitalWrite(zonePin, HIGH);
    pinMode(zonePin, OUTPUT);
-   return 1;
+   //return 1;
  }
  
- if (zoneState = 1 && millis() - zonePulse >= signalPulse){
+ if (zoneState == 1 && millis() - zonePulse >= signalPulse){
+   Serial.println("----> Moving back to pinmode INPUT");
    zoneState = 0;
    pinMode(zonePin, INPUT);
-   digitalWrite(zonePin, LOW);
-
+   digitalWrite(zonePin, LOW); 
  }
  
- return 0;
+ return remoteTrigger || localTrigger;
 }
 
 int write_states(){
@@ -216,6 +215,25 @@ void setup() {
 }
 
 void loop() {
+//  Serial.println("------------------------------");
+//  for (int i; i<7; i++){
+//    Serial.print("light ");
+//    Serial.print(i);
+//    Serial.print(":\t");
+//    Serial.println(!digitalRead(lightsIn[i]));
+//  }
+//  Serial.print("all pin:\t");
+//  Serial.println(digitalRead(allPin));
+//  Serial.print("zone pin:\t");
+//  Serial.println(digitalRead(zonePin));
+//  Serial.print("zoneState:\t");
+//  Serial.println(zoneState);  
+//  Serial.print("millis():\t");
+//  Serial.println(millis());
+//  Serial.print("zonePulse:\t");
+//  Serial.println(zonePulse);
+
+  
   int i;
   int allOff = 0;  // stores whether an all off should be triggerd
   int zoneOff = 0; // stores wheterh a zone off should be triggerd
