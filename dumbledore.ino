@@ -6,24 +6,28 @@
 const int minPulseWidth = 10;                        // minimum duration for valid inter board signal (in ms)
 const int signalPulse = 20;                          // duration of a signal between different boards (in ms)
 const int zonePin = 12;                              // the zone off pin
-long zoneDebounce;                                   // debounce timer for reading zoneoff
+unsigned long zoneDebounce;                                   // debounce timer for reading zoneoff
 int zoneInState = 0;                                 // state variable for reading
-long zonePulse;                                      // timer for pulse generation
+unsigned long zonePulse;                                      // timer for pulse generation
 int zoneState = 0;                                   // state variable for pulse generation
 const int allPin = 13;                               // the all off pin
-long allDebounce;                                    // debounce timer for reading alloff
+unsigned long allDebounce;                                    // debounce timer for reading alloff
 int allInState = 0;                                  // state variable for reading
-long allPulse;                                       // timer for pulse generation
+unsigned long allPulse;                                       // timer for pulse generation
 int allState = 0;                                    // state variable for pulse generation
 const int numOfLights = 7;                           // the number of lights
 const int lightsIn[numOfLights] = {10, 14, 15, 16, 17, 18, 19};   //The input pins of the lights
 const int lightsOut[numOfLights] = {9, 8, 7, 6, 5, 4, 3}; //The output pins of the lights
 int outState[numOfLights] = {0, 0, 0, 0, 0, 0, 0};         //The current state of the lights
 int inState[numOfLights] = {0, 0, 0, 0, 0, 0, 0};          //The current state of the inputs
-long inMillis[numOfLights] = {0, 0, 0, 0, 0, 0, 0};        //Used to debounce and time the inputs
+unsigned long inMillis[numOfLights] = {0, 0, 0, 0, 0, 0, 0};        //Used to debounce and time the inputs
 int debounceTime = 20;                               //Threshold for a valid input signal (in ms)
 int zoneThreshold = 1000;                            //Threshold to swich over to a zone signal (in ms)
 int allThreshold = 3000;                             //Threshold to switch over to an all signal (in ms)
+const int numOfFanTriggers = 3;                      //Number of lights that can trigger the fan pin
+const int fanTriggers[numOfFanTriggers] = {1, 2, 3}; //The indexed of the lights that can trigger the fan pin
+const int fanPin = 9999;                             //The pin number of the fan pin 
+
 
 int read_light(int lightNr){
   int newVal;       //Stores data read from the pin
@@ -40,7 +44,7 @@ int read_light(int lightNr){
   /* Triger an all or zone off whenever the timer has elapsed
      but only trigger the toggle on a faling edge */
   else{
-    long timeDelta;
+    unsigned long timeDelta;
     if (newVal == 0) inState[lightNr] = 0;     // set the last known state to off
     timeDelta = millis() - inMillis[lightNr];  // calculate the time the pin was high upto now
     if (timeDelta > allThreshold) return ALL;  // if it was more than the all of timer
@@ -88,7 +92,7 @@ int read_all_off(){
   if (allInState == 1){ // if the last know value was one
     Serial.println("We know all the pin is high");
  //   if (newVal == 0){ // and we have a faling edge
-      long timeDelta;
+      unsigned long timeDelta;
 
       if (newVal == 0) allInState = 0; // last known value is now low
       timeDelta = millis()-allDebounce;
@@ -147,7 +151,7 @@ int read_zone_off(){
   if (zoneInState == 1){ // if the last know value was one
     Serial.println("We know the zone pin is high");
  //   if (newVal == 0){ // and we have a faling edge
-      long timeDelta;
+      unsigned long timeDelta;
 
       if (newVal == 0) zoneInState = 0; // last known value is now low
       timeDelta = millis()-zoneDebounce;
@@ -195,9 +199,18 @@ int do_zone_off(int localTrigger){
 
 int write_states(){
   int i;
+  int fanTarget;
   for (i = 0; i < numOfLights; i++){
     digitalWrite(lightsOut[i], outState[i]);
   }
+
+  fanTarget = 0;
+  for (i = 0; i < numOfFanTriggers; i++){
+      if(outState[fanTriggers[i]]) fanTarget = 1;
+  }
+  digitalWrite(fanPin, fanTarget);
+
+  
 }
 
 void setup() {
