@@ -209,7 +209,7 @@ int write_states(){
   for (i = 0; i < numOfFanTriggers; i++){
       if(outState[fanTriggers[i]]) fanTarget = 1;
   }
-  digitalWrite(fanPin, fanTarget);
+  //digitalWrite(fanPin, fanTarget);
 
   
 }
