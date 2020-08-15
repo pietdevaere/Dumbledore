@@ -4,7 +4,7 @@ const int boostPin = 8;                              // pin to connect boost to 
 const int numOfBoostZones = 1;                       // number of boost zone input pins
 const int boostZones[numOfBoostZones] = {0}  ;        // the zone numbers that require boost
 const int numOfColdZones = 3;
-const int coldZones = {1, 2, 3};
+const int coldZones[numOfColdZones] = {1, 2, 3};
 const int numOfZones = 7;                            // the number of input zones
 const int zonePins[numOfZones] = {10, 14, 15, 16, 17, 18, 19};   //The input pins of the zones
 const int wtwPin = 9999;                                                    
@@ -31,7 +31,7 @@ void loop() {
 
     // first check the cold zones
     for (i = 0; i < numOfColdZones; i++){
-        if (digitalRead(zonePins[coldzones[i]]))
+        if (digitalRead(zonePins[coldZones[i]]))
             fanTimer = millis() + offDelay;
     }
 
