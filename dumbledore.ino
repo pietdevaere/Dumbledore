@@ -50,6 +50,7 @@ int read_light(int lightNr){
     if (timeDelta > allThreshold) return ALL;  // if it was more than the all of timer
     else if (timeDelta > zoneThreshold) return ZONE;  // if it was more than the zone timer
     else if (newVal == 0 && timeDelta > debounceTime) return TOGGLE; // faling edge and valid pulse
+    return NONE;
   }
   
   
